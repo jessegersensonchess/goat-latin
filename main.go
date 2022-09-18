@@ -2,7 +2,6 @@
 package main
 
 import (
-	"bytes"
 	"strings"
 )
 
@@ -15,7 +14,7 @@ func goatLatin(s string) string {
 	var sb strings.Builder
 	var a strings.Builder
 	// calculate sb's final size -- the sum of 1+2+3+4 is n(n+1)/2
-	wordCount := len(bytes.Fields([]byte(s)))
+	wordCount := strings.Count(s, " ")
 	bufferSize := len(s) + int((wordCount*(wordCount+1))/2) + (wordCount * len("ma"))
 	sb.Grow(bufferSize)
 
