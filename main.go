@@ -7,34 +7,52 @@ import (
 )
 
 func goatLatin(s string) string {
+
 	if len(s) == 0 {
 		return ""
 	}
 
 	var sb strings.Builder
+	var a strings.Builder
 	// calculate sb's final size -- the sum of 1+2+3+4 is n(n+1)/2
 	wordCount := len(bytes.Fields([]byte(s)))
 	bufferSize := len(s) + int((wordCount*(wordCount+1))/2) + (wordCount * len("ma"))
 	sb.Grow(bufferSize)
 
-	for i, v := range bytes.Fields([]byte(s)) {
-		if strings.ContainsAny(string(v[0]), "aeiouAEIOU") {
-			// first letter of word is a vowel
-			sb.WriteString(string(v) + "ma" + strings.Repeat("a", i+1) + " ")
-		} else {
-			// first letter of word is a consonant
-			if len(v) == 1 {
-				sb.WriteString(string(v) + "ma" + strings.Repeat("a", i+1) + " ")
+	var prev rune
+	var first rune
+	for i, v := range s {
+		// first letter of a word
+		if v != ' ' {
+			if i == 0 || prev == ' ' {
+				first = v
+				a.WriteRune('a')
+				if strings.ContainsAny(string(first), "aeiouAEIOU") {
+					sb.WriteRune(v)
+				}
 			} else {
-				sb.WriteString(string(v[1:]) + string(v[0]) + "ma" + strings.Repeat("a", i+1) + " ")
+				sb.WriteRune(v)
 			}
 		}
+
+		// first space after a word. append ending
+		if v == ' ' && prev != ' ' {
+			if strings.ContainsAny(string(first), "aeiouAEIOU") {
+				sb.WriteString("ma" + a.String() + " ")
+			} else {
+				sb.WriteString(string(first) + "ma" + a.String() + " ")
+			}
+		}
+		prev = v
+
 	}
 	return strings.TrimRight(sb.String(), " ")
+
 }
 
 func main() {
-		s := "This is an example of goat latin"
-		println(goatLatin(s))
+	s := "asdlfkjasdf aslkdfjasdflkj asdflkjasdf lkjasdflkj asdflkjasdflkjasdflkjasdflkj asdlfkjasdflkjasdflkjasdfklkasjdflkjasdflkjasd asdflkjasdflkjasdflkjasdf asdflkjasdflkjasdflkjaas asdflkjasdflkjasdflkjasdfasdlfkjasdf aslkdfjasdflkj asdflkjasdf lkjasdflkj asdflkjasdflkjasdflkjasdflkj asdlfkjasdflkjasdflk"
+
+	println(len(goatLatin(s)))
 
 }
