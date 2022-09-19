@@ -35,23 +35,21 @@ func goatLatin(s string) string {
 		}
 
 		// first space after a word. append ending
-		if v == ' ' && prev != ' ' {
+		if v == ' ' && prev != ' ' || i == len(s)-1 {
 			if strings.ContainsAny(string(first), "aeiouAEIOU") {
 				sb.WriteString("ma" + a.String() + " ")
 			} else {
 				sb.WriteString(string(first) + "ma" + a.String() + " ")
 			}
 		}
+		println("i", i, len(s))
 		prev = v
 
 	}
 	return strings.TrimRight(sb.String(), " ")
-
 }
 
 func main() {
-	s := "asdlfkjasdf aslkdfjasdflkj asdflkjasdf lkjasdflkj asdflkjasdflkjasdflkjasdflkj asdlfkjasdflkjasdflkjasdfklkasjdflkjasdflkjasd asdflkjasdflkjasdflkjasdf asdflkjasdflkjasdflkjaas asdflkjasdflkjasdflkjasdfasdlfkjasdf aslkdfjasdflkj asdflkjasdf lkjasdflkj asdflkjasdflkjasdflkjasdflkj asdlfkjasdflkjasdflk"
-
-	println(len(goatLatin(s)))
-
+	s := "ahoj vole"
+	println(goatLatin(s))
 }
