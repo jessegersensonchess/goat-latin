@@ -42,9 +42,7 @@ func goatLatin(s string) string {
 				sb.WriteString(string(first) + "ma" + a.String() + " ")
 			}
 		}
-		println("i", i, len(s))
 		prev = v
-
 	}
 	return strings.TrimRight(sb.String(), " ")
 }
