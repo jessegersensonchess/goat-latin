@@ -36,6 +36,18 @@ func TestGoatLatin(t *testing.T) {
 		t.Log("expecting:", output)
 		t.Fail()
 	}
+	input = ""
+	output = ""
+	if goatLatin(input) != output {
+		t.Log("expecting:", output)
+		t.Fail()
+	}
+	input = "this  has  many   spaces"
+	output = "histmaa ashmaaa anymmaaaa pacessmaaaaa"
+	if goatLatin(input) != output {
+		t.Log("expecting:", output)
+		t.Fail()
+	}
 
 	input = "How? Is this the first time?"
 	output = "ow?Hmaa Ismaaa histmaaaa hetmaaaaa irstfmaaaaaa ime?tmaaaaaaa"
