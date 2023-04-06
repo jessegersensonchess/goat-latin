@@ -10,14 +10,6 @@ on:
           - Stage
           - Production
 
-
-if: ${{ github.event.inputs.target_env }} == "Production"
-env:
-  ACCOUNT: 2
-  REGION: us-east-1
-  ACCESS_KEY: b
-  SECRET_KEY: bb
-
 jobs:
   build:
     name: build this
