@@ -1,0 +1,40 @@
+name: testingIfConditions
+on:
+  workflow_dispatch:
+    inputs:
+      target_env:
+        description: target environment
+        type: choice
+        default: Stage
+        options:
+          - Stage
+          - Production
+
+if: ${{ github.event.inputs.target_env }} == "Stage"
+  env:
+    ACCOUNT: 1
+    REGION: us-west-1
+    ACCESS_KEY: a
+    SECRET_KEY: aa
+
+if: ${{ github.event.inputs.target_env }} == "Production"
+  env:
+    ACCOUNT: 2
+    REGION: us-east-1
+    ACCESS_KEY: b
+    SECRET_KEY: bb
+
+jobs:
+  build:
+    name: build this
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: step1
+        run: |
+
+	#### Stage ####
+          echo "${{ env.ACCOUNT }}"
+          echo "${{ env.REGION }}"
+          echo "${{ env.ACCESS_KEY }}"
+          echo "${{ env.SECRET_KEY }}"
