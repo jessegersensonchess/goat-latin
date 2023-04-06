@@ -24,10 +24,10 @@ jobs:
           ACCESS_KEY: a
           SECRET_KEY: aa
         run: |
-          echo "${{ env.ACCOUNT }}" >> $GITHUB_ENV
-          echo "${{ env.REGION }}" >> $GITHUB_ENV
-          echo "${{ env.ACCESS_KEY }}" >> $GITHUB_ENV
-          echo "${{ env.SECRET_KEY }}" >> $GITHUB_ENV
+          echo "ACCOUNT=${{ env.ACCOUNT }}" >> $GITHUB_ENV
+          echo "REGION=${{ env.REGION }}" >> $GITHUB_ENV
+          echo "ACCESS_KEY=${{ env.ACCESS_KEY }}" >> $GITHUB_ENV
+          echo "SECRET_KEY=${{ env.SECRET_KEY }}" >> $GITHUB_ENV
       - name: prod
         if: ${{ github.event.inputs.target_env == 'Production' }} 
         env:
@@ -36,10 +36,10 @@ jobs:
           ACCESS_KEY: b
           SECRET_KEY: bb
         run: |
-          echo "${{ env.ACCOUNT }}" >> $GITHUB_ENV
-          echo "${{ env.REGION }}" >> $GITHUB_ENV
-          echo "${{ env.ACCESS_KEY }}" >> $GITHUB_ENV
-          echo "${{ env.SECRET_KEY }}" >> $GITHUB_ENV
+          echo "ACCOUNT=${{ env.ACCOUNT }}" >> $GITHUB_ENV
+          echo "REGION=${{ env.REGION }}" >> $GITHUB_ENV
+          echo "ACCESS_KEY=${{ env.ACCESS_KEY }}" >> $GITHUB_ENV
+          echo "SECRET_KEY=${{ env.SECRET_KEY }}" >> $GITHUB_ENV
       - name: runthis
         run: |
           echo "run this: ${{ env.ACCOUNT }}"
