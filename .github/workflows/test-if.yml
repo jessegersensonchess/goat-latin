@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: stage
-        if: ${{ github.event.inputs.target_env }} == "Stage"
+        if: ${{ github.event.inputs.target_env == "Stage" }} 
         env:
           ACCOUNT: 1
           REGION: us-west-1
@@ -29,7 +29,7 @@ jobs:
           echo "${{ env.ACCESS_KEY }}"
           echo "${{ env.SECRET_KEY }}"
       - name: prod
-        if: ${{ github.event.inputs.target_env }} == "Stage"
+        if: ${{ github.event.inputs.target_env == "Production" }} 
         env:
           ACCOUNT: 2
           REGION: us-west-2
@@ -43,3 +43,4 @@ jobs:
       - name: runthis
         run: |
           echo "run this: ${{ env.ACCOUNT }}"
+          echo "target env ${{ github.event.inputs.target_env }}"
